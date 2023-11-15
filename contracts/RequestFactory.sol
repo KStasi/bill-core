@@ -9,7 +9,14 @@ import "./Request.sol";
 contract RequestFactory {
     Request public immutable requestImplementation;
 
-    event RequestDeployed(address indexed newRequest);
+    event RequestDeployed(
+        address indexed newRequest,
+        string requestType,
+        string ipfsHash,
+        address indexed payer,
+        address indexed payee,
+        uint256 amount
+    );
 
     constructor(address _storageManager) {
         requestImplementation = new Request(_storageManager);
@@ -46,7 +53,14 @@ contract RequestFactory {
                 )
             )
         );
-        emit RequestDeployed(address(ret));
+        emit RequestDeployed(
+            address(ret),
+            requestType,
+            ipfsHash,
+            payer,
+            payee,
+            amount
+        );
     }
 
     function getAddress(

@@ -1,5 +1,8 @@
 import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
+// import "@nomicfoundation/hardhat-toolbox";
+import "hardhat-deploy";
+import "@nomiclabs/hardhat-ethers";
+
 const dotenv = require("dotenv");
 dotenv.config();
 

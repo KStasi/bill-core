@@ -27,12 +27,12 @@ contract Request is UUPSUpgradeable, Initializable {
     event RequestCreated(address storageManager);
     event RequestCancelled();
     event RequestAccepted();
-    event RequestEdited(uint256 amount);
+    event RequestAmountEdited(uint256 amount);
     event RequestInitialized(
         string requestType,
         string ipfsHash,
-        address payer,
-        address payee,
+        address indexed payer,
+        address indexed payee,
         uint256 amount
     );
 
@@ -146,7 +146,7 @@ contract Request is UUPSUpgradeable, Initializable {
         bytes memory signature
     ) external onlyAuthorized("edit", abi.encode(_amount), signature) {
         amount = _amount;
-        emit RequestEdited(_amount);
+        emit RequestAmountEdited(_amount);
     }
 
     function _authorizeUpgrade(
