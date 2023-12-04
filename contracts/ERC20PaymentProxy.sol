@@ -16,6 +16,11 @@ contract ERC20PaymentProxy {
         revert("The contract is not payable");
     }
 
+    // Description: Transfers ERC20 to the specified address
+    // tokenAddress: address of the ERC20 token
+    // to: address of the recipient
+    // value: amount of ERC20 to transfer
+    // referenceId: address of the request
     function transferWithReference(
         address tokenAddress,
         address to,

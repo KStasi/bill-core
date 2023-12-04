@@ -22,6 +22,7 @@ contract Request is UUPSUpgradeable, Initializable {
     address public payer;
     address public payee;
     address public immutable storageManager;
+    address public asset;
     uint256 public amount;
 
     event RequestCreated(address storageManager);
@@ -33,6 +34,7 @@ contract Request is UUPSUpgradeable, Initializable {
         string ipfsHash,
         address indexed payer,
         address indexed payee,
+        address indexed asset,
         uint256 amount
     );
 
@@ -47,9 +49,10 @@ contract Request is UUPSUpgradeable, Initializable {
         string memory _ipfsHash,
         address _payer,
         address _payee,
+        address _asset,
         uint256 _amount
     ) public virtual initializer {
-        _initialize(_type, _ipfsHash, _payer, _payee, _amount);
+        _initialize(_type, _ipfsHash, _payer, _payee, _asset, _amount);
     }
 
     function _initialize(
@@ -57,6 +60,7 @@ contract Request is UUPSUpgradeable, Initializable {
         string memory _ipfsHash,
         address _payer,
         address _payee,
+        address _asset,
         uint256 _amount
     ) internal virtual {
         requestData = RequestData({
@@ -66,8 +70,16 @@ contract Request is UUPSUpgradeable, Initializable {
         });
         payer = _payer;
         payee = _payee;
+        asset = _asset;
         amount = _amount;
-        emit RequestInitialized(_type, _ipfsHash, _payer, _payee, _amount);
+        emit RequestInitialized(
+            _type,
+            _ipfsHash,
+            _payer,
+            _payee,
+            _asset,
+            _amount
+        );
     }
 
     modifier onlyAuthorized(
@@ -127,6 +139,8 @@ contract Request is UUPSUpgradeable, Initializable {
             _isValidSignature(messageHash, signature, payee);
     }
 
+    // Description: Cancels the request
+    // signature: signature of the payer
     function cancel(
         bytes memory signature
     ) external onlyAuthorized("cancel", "0x", signature) {
@@ -134,6 +148,8 @@ contract Request is UUPSUpgradeable, Initializable {
         emit RequestCancelled();
     }
 
+    // Description: Accepts the request
+    // signature: signature of the payer
     function accept(
         bytes memory signature
     ) external onlyPayerAuthorized("accept", signature) {
@@ -141,6 +157,8 @@ contract Request is UUPSUpgradeable, Initializable {
         emit RequestAccepted();
     }
 
+    // Description: Edits the amount of the request
+    // amount: new amount of the request
     function edit(
         uint256 _amount,
         bytes memory signature

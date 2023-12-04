@@ -22,11 +22,20 @@ contract RequestFactory {
         requestImplementation = new Request(_storageManager);
     }
 
+    // Description: Deploys a new document
+    // requestType: "bill", "invoice", "receipt", "refund" etc.
+    // ipfsHash: IPFS hash of the request
+    // payer: address of the payer
+    // payee: address of the payee
+    // asset: address of the asset
+    // amount: amount of the asset
+    // salt: salt for the address computation
     function createRequest(
         string memory requestType,
         string memory ipfsHash,
         address payer,
         address payee,
+        address asset,
         uint256 amount,
         uint256 salt
     ) public returns (Request ret) {
@@ -35,6 +44,7 @@ contract RequestFactory {
             ipfsHash,
             payer,
             payee,
+            asset,
             amount,
             salt
         );
@@ -48,7 +58,7 @@ contract RequestFactory {
                     address(requestImplementation),
                     abi.encodeCall(
                         Request.initialize,
-                        (requestType, ipfsHash, payer, payee, amount)
+                        (requestType, ipfsHash, payer, payee, asset, amount)
                     )
                 )
             )
@@ -63,11 +73,20 @@ contract RequestFactory {
         );
     }
 
+    // Description: Computes the address of a new document
+    // requestType: "bill", "invoice", "receipt", "refund" etc.
+    // ipfsHash: IPFS hash of the request
+    // payer: address of the payer
+    // payee: address of the payee
+    // asset: address of the asset
+    // amount: amount of the asset
+    // salt: salt for the address computation
     function getAddress(
         string memory requestType,
         string memory ipfsHash,
         address payer,
         address payee,
+        address asset,
         uint256 amount,
         uint256 salt
     ) public view returns (address) {
@@ -81,7 +100,14 @@ contract RequestFactory {
                             address(requestImplementation),
                             abi.encodeCall(
                                 Request.initialize,
-                                (requestType, ipfsHash, payer, payee, amount)
+                                (
+                                    requestType,
+                                    ipfsHash,
+                                    payer,
+                                    payee,
+                                    asset,
+                                    amount
+                                )
                             )
                         )
                     )

@@ -13,6 +13,10 @@ contract NativePaymentProxy {
         revert("The contract is not payable");
     }
 
+    // Description: Transfers ETH to the specified address
+    // to: address of the recipient
+    // value: amount of ETH to transfer
+    // referenceId: address of the request
     function transferWithReference(
         address to,
         uint256 value,
