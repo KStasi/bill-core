@@ -29,11 +29,11 @@ Make sure to provide env variables or create .env file with the `INFURA_KEY` and
 
 **XRPL EVM Sidechain:**
 
-==RequestFactory addr= 0xCc6a1C5CecEFC85Ee80350D6820152D1081fE48a
+`RequestFactory`: `0xCc6a1C5CecEFC85Ee80350D6820152D1081fE48a`
 
-==ERC20PaymentProxy addr= 0x6FbEf10f8e1Ae82A66ee6AEec394A9f0c6a64263
+`ERC20PaymentProxy`: `0x6FbEf10f8e1Ae82A66ee6AEec394A9f0c6a64263`
 
-==NativePaymentProxy addr= 0xe198285bD9EA7A3Bf10065DA711F45B6D4A3761F
+`NativePaymentProxy`: `0xe198285bD9EA7A3Bf10065DA711F45B6D4A3761F`
 
 ## License
 
