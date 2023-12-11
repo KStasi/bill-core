@@ -23,13 +23,16 @@ npm compile
 npm deploy
 ```
 
-Make sure to provide env variables or create .env file with the INFURA_KEY and PRIVATE_KEY for the deployment.
+Make sure to provide env variables or create .env file with the `INFURA_KEY` and `PRIVATE_KEY` for the deployment.
 
 ## Deployed contracts
 
-**XRPL EVM Sidechain**
+**XRPL EVM Sidechain:**
+
 ==RequestFactory addr= 0xCc6a1C5CecEFC85Ee80350D6820152D1081fE48a
+
 ==ERC20PaymentProxy addr= 0x6FbEf10f8e1Ae82A66ee6AEec394A9f0c6a64263
+
 ==NativePaymentProxy addr= 0xe198285bD9EA7A3Bf10065DA711F45B6D4A3761F
 
 ## License
